@@ -1,64 +1,82 @@
-// import { Ionicons } from '@expo/vector-icons';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import { useFocusEffect, useRouter } from 'expo-router';
-// import React, { useCallback, useState } from 'react';
-// import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useState } from 'react';
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-// type AudioItem = {
-//   id: string;
-//   name: string;
-//   duration: string;
-//   uri: string;
-//   size: string;
-// };
+export default function AudioListScreen() {
+  const [audios, setAudios] = useState([]);
+  const router = useRouter();
 
-// export default function AudioLibraryScreen() {
-//   const [audios, setAudios] = useState<AudioItem[]>([]);
-//   const router = useRouter();
+  // Load audios every time screen is focused
+  useFocusEffect(
+    useCallback(() => {
+      const load = async () => {
+        const stored = await AsyncStorage.getItem('audios');
+        const parsed = stored ? JSON.parse(stored) : [];
+        setAudios(parsed.reverse()); // newest first
+      };
+      load();
+    }, [])
+  );
 
-//   useFocusEffect(
-//     useCallback(() => {
-//       const loadData = async () => {
-//         const data = await AsyncStorage.getItem('audios');
-//         if (data) {
-//           setAudios(JSON.parse(data));
-//         }
-//       };
-//       loadData();
-//     }, [])
-//   );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Saved Voice</Text>
 
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.heading}>Your library</Text>
-//       <Text style={styles.subheading}>Audio Library</Text>
+      <FlatList
+        data={audios}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={<Text>No recordings found</Text>}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={styles.card}
+            onPress={() => router.push({ pathname: '/voice/play', params: item })}
+          >
+            <Ionicons name="musical-notes-outline" size={24} color="#4B5563" style={{ marginRight: 12 }} />
+            <View>
+              <Text style={styles.name}>{item.name}</Text>
+              <Text style={styles.meta}>Duration: {item.duration} sec</Text>
+            </View>
+          </TouchableOpacity>
+        )}
+      />
 
-//       <FlatList
-//         data={audios}
-//         keyExtractor={(item) => item.id}
-//         contentContainerStyle={{ paddingBottom: 100 }}
-//         renderItem={({ item }) => (
-//           <View style={styles.item}>
-//             <Ionicons name="mic-outline" size={24} color="#4B5563" style={{ marginRight: 10 }} />
-//             <View style={{ flex: 1 }}>
-//               <Text style={styles.name}>{item.name}</Text>
-//               <Text style={styles.meta}>{item.duration} · {item.size}</Text>
-//             </View>
-//             <Ionicons name="play-circle" size={28} color="#2563EB" />
-//           </View>
-//         )}
-//         ListEmptyComponent={
-//           <Text style={{ textAlign: 'center', marginTop: 24, color: '#9CA3AF' }}>
-//             No audio recordings found.
-//           </Text>
-//         }
-//       />
+      <TouchableOpacity style={styles.fab} onPress={() => router.push('/voice/record')}>
+        <Ionicons name="add" size={32} color="white" />
+      </TouchableOpacity>
+    </View>
+  );
+}
 
-//       <TouchableOpacity style={styles.fab} onPress={() => router.push('/record-audio')}>
-//         <Ionicons name="add" size={28} color="#fff" />
-//       </TouchableOpacity>
-//     </View>
-//   );
-// }
+const styles = StyleSheet.create({
+  container: { flex: 1, padding: 16, backgroundColor: '#fff' },
+  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 12 },
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 12,
+    marginBottom: 8,
+    backgroundColor: '#F3F4F6',
+    borderRadius: 8,
+  },
+  name: { fontSize: 16, fontWeight: '600' },
+  meta: { fontSize: 14, color: '#6B7280' },
 
-// const styles = StyleSheet
+  fab: {
+    position: 'absolute',
+    bottom: 30,
+    right: 20,
+    backgroundColor: '#3B82F6',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 5,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+  },
+});
