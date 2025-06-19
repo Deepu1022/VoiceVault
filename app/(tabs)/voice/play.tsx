@@ -1,4 +1,4 @@
-import WaveformPreview from '@/components/WaveForm';
+import WaveForm from '@/components/WaveForm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
 import { Audio } from 'expo-av';
@@ -94,7 +94,7 @@ export default function AudioPlayerScreen() {
     <View style={styles.container}>
       <Text style={styles.title}>{name}</Text>
       <View style={styles.waveformPlaceholder}>
-        <WaveformPreview></WaveformPreview>
+        <WaveForm></WaveForm>
       </View>
 
       <Slider

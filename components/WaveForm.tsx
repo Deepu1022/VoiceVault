@@ -1,14 +1,14 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-export default function WaveformPreview({ barCount = 40 }) {
-  const bars = Array.from({ length: barCount }, (_, i) => Math.random());
+export default function WaveForm({ barCount = 40 }) {
+  const bars = Array.from({ length: barCount }, () => Math.random());
 
   return (
     <View style={styles.container}>
-      {bars.map((height, index) => (
+      {bars.map((height, i) => (
         <View
-          key={index}
+          key={i}
           style={[
             styles.bar,
             {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     height: 60,
     width: '100%',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     overflow: 'hidden',
     marginBottom: 20,

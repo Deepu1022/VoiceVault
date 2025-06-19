@@ -22,7 +22,7 @@ export default function AudioListScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Saved Voice</Text>
+      <Text style={styles.title}>Voice Library</Text>
 
       <FlatList
         data={audios}
