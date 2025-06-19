@@ -31,7 +31,7 @@ export default function VaultScreen() {
         (async () => {
             const stored = await AsyncStorage.getItem('files');
             const parsed = stored ? JSON.parse(stored) : [];
-            console.log('📦 Loaded:', parsed);
+            console.log('Loaded:', parsed);
             setFiles(parsed);
         })();
     }, []);
@@ -40,7 +40,7 @@ export default function VaultScreen() {
         try {
             const result = await DocumentPicker.getDocumentAsync({});
             if (result.canceled) {
-                console.log('❌ File picking cancelled');
+                console.log('File picking cancelled');
                 return;
             }
 
@@ -59,10 +59,8 @@ export default function VaultScreen() {
             const updated = [...parsed, newFile];
 
             await AsyncStorage.setItem('files', JSON.stringify(updated));
-            console.log('✅ File saved:', updated);
             setFiles(updated);
         } catch (err) {
-            console.error('❌ Error picking file:', err);
         }
     };
 
@@ -94,10 +92,10 @@ export default function VaultScreen() {
                     type: mimeType,
                 });
             } else {
-                await WebBrowser.openBrowserAsync(uri); // works for iOS/web
+                await WebBrowser.openBrowserAsync(uri); 
             }
         } catch (error) {
-            console.error('❌ Failed to open file:', error);
+            console.error('Failed to open file:', error);
         }
     };
 

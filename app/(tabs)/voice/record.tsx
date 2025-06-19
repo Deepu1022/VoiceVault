@@ -59,42 +59,42 @@ export default function RecordScreen() {
     }
   };
 
- const stopRecording = async () => {
-  try {
-    if (!recording) return;
+  const stopRecording = async () => {
+    try {
+      if (!recording) return;
 
-    clearInterval(intervalRef.current!);
-    await recording.stopAndUnloadAsync();
+      clearInterval(intervalRef.current!);
+      await recording.stopAndUnloadAsync();
 
-    const uri = recording.getURI();
-    if (!uri) throw new Error('Recording URI is null');
+      const uri = recording.getURI();
+      if (!uri) throw new Error('Recording URI is null');
 
-    const filename = `audio_${Date.now()}.m4a`;
-    const newPath = FileSystem.documentDirectory + filename;
+      const filename = `audio_${Date.now()}.m4a`;
+      const newPath = FileSystem.documentDirectory + filename;
 
-  
-    await FileSystem.moveAsync({
-      from: uri,
-      to: newPath,
-    });
 
-    const durationSec = Math.floor(duration / 1000);
-    setRecording(null);
+      await FileSystem.moveAsync({
+        from: uri,
+        to: newPath,
+      });
 
-   
-    router.push({
-      pathname: '/voice/review',
-      params: { uri: newPath, duration: durationSec.toString() },
-    });
-  } catch (e) {
-    console.error('Error stopping recording:', e);
-    alert('Failed to save recording.');
-  }
-};
+      const durationSec = Math.floor(duration / 1000);
+      setRecording(null);
+
+
+      router.push({
+        pathname: '/voice/review',
+        params: { uri: newPath, duration: durationSec.toString() },
+      });
+    } catch (e) {
+      console.error('Error stopping recording:', e);
+      alert('Failed to save recording.');
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <BackButton/>
+      <BackButton />
       <Text style={styles.timer}>{formatTime(duration)}</Text>
 
       <WaveForm barCount={50} />

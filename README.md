@@ -1,50 +1,52 @@
-# Welcome to your Expo app 👋
+# 🎙️ VoiceVault
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+VoiceVault is a simple mobile app built with **Expo** and **React Native**.
 
-## Get started
+It allows users to:
+- Record, save, and play audio clips
+- Pick and view files (PDFs, images, videos)
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 📦 Tech Stack
 
-2. Start the app
+- React Native + Expo
+- `expo-router` for navigation
+- `expo-av` for audio
+- `expo-document-picker` for file access
+- `@react-native-async-storage/async-storage` for storage
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Structure
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 📁 Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+VoiceVault/
+├── app/
+│   ├── (tabs)/                    # Bottom tab navigator
+│   │   ├── _layout.tsx            # Tab layout with Voice and Vault
+│   │   ├── voice/                 # All audio features
+│   │   │   ├── index.tsx          # Audio list screen
+│   │   │   ├── record.tsx         # Record screen
+│   │   │   ├── review.tsx         # Review & save screen
+│   │   │   └── play.tsx           # Playback screen
+│   │   ├── vault/                 # All file picker/viewer features
+│   │   │   ├── index.tsx          # Vault list screen
+│   │   │   └── pick.tsx           # Pick file screen
+├── components/                    # Custom UI components (e.g., Waveform)
+├── assets/                        # Icons, images, audio
+├── App.tsx                        # App entry point
+├── README.md                      # Project documentation
 
-## Get a fresh project
+## 🚀 Getting Started
 
-When you're ready, run:
+1. Install dependencies:
 
 ```bash
-npm run reset-project
+npm install
 ```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+2. Run the App
+```
+npx expo start
+```
