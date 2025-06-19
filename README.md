@@ -22,6 +22,7 @@ It allows users to:
 
 ## 📁 Project Structure
 
+```text
 VoiceVault/
 ├── app/
 │   ├── (tabs)/                    # Bottom tab navigator
@@ -34,11 +35,11 @@ VoiceVault/
 │   │   ├── vault/                 # All file picker/viewer features
 │   │   │   ├── index.tsx          # Vault list screen
 │   │   │   └── pick.tsx           # Pick file screen
-├── components/                    # Custom UI components (e.g., Waveform)
+├── components/                    # Reusable UI components (e.g., Waveform)
 ├── assets/                        # Icons, images, audio
 ├── App.tsx                        # App entry point
 ├── README.md                      # Project documentation
-
+```
 ## 🚀 Getting Started
 
 1. Install dependencies:
