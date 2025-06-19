@@ -1,3 +1,4 @@
+import CloseButton from '@/components/CloseButton';
 import WaveForm from '@/components/WaveForm';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Slider from '@react-native-community/slider';
@@ -92,6 +93,7 @@ export default function AudioPlayerScreen() {
 
   return (
     <View style={styles.container}>
+        <CloseButton to="/voice" />
       <Text style={styles.title}>{name}</Text>
       <View style={styles.waveformPlaceholder}>
         <WaveForm></WaveForm>

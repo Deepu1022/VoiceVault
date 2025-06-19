@@ -1,9 +1,9 @@
+import CloseButton from '@/components/CloseButton';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Audio } from 'expo-av';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-
 export default function ReviewAudioScreen() {
   const { uri, duration } = useLocalSearchParams<{ uri: string; duration: string }>();
   const [sound, setSound] = useState<Audio.Sound | null>(null);
@@ -55,6 +55,7 @@ export default function ReviewAudioScreen() {
 
   return (
     <View style={styles.container}>
+      <CloseButton to="/voice" />
       <Text style={styles.title}>Review</Text>
       <Button title="Play" onPress={() => sound?.replayAsync()} />
       <Button title="Save Audio" onPress={saveAudio} />

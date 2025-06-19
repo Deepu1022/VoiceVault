@@ -1,4 +1,5 @@
-import WaveForm from '@/components/WaveForm'; // Make sure this file exists
+import BackButton from '@/components/BackButton';
+import WaveForm from '@/components/WaveForm';
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
 import { useRouter } from 'expo-router';
@@ -53,7 +54,7 @@ export default function RecordScreen() {
         }
       }, 200);
     } catch (e) {
-      console.error('🎙️ Recording failed to start:', e);
+      console.error('Recording failed to start:', e);
       alert('Failed to start recording. Check microphone permission.');
     }
   };
@@ -71,7 +72,7 @@ export default function RecordScreen() {
     const filename = `audio_${Date.now()}.m4a`;
     const newPath = FileSystem.documentDirectory + filename;
 
-    // Move to permanent location
+  
     await FileSystem.moveAsync({
       from: uri,
       to: newPath,
@@ -80,19 +81,20 @@ export default function RecordScreen() {
     const durationSec = Math.floor(duration / 1000);
     setRecording(null);
 
-    // Navigate to review screen
+   
     router.push({
       pathname: '/voice/review',
       params: { uri: newPath, duration: durationSec.toString() },
     });
   } catch (e) {
-    console.error('🛑 Error stopping recording:', e);
+    console.error('Error stopping recording:', e);
     alert('Failed to save recording.');
   }
 };
 
   return (
     <View style={styles.container}>
+      <BackButton/>
       <Text style={styles.timer}>{formatTime(duration)}</Text>
 
       <WaveForm barCount={50} />
