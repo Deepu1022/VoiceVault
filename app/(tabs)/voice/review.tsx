@@ -69,7 +69,7 @@ export default function ReviewAudioScreen() {
   const saveAudio = async () => {
     const newAudio = {
       id: Date.now().toString(),
-      name: `audio_${Date.now()}.m4a`,
+      name: `Audio_${Date.now()}.m4a`,
       uri,
       duration,
     };

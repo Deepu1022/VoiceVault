@@ -95,6 +95,11 @@ export default function RecordScreen() {
   return (
     <View style={styles.container}>
       <BackButton />
+      <View>
+       <View style={styles.header}>
+        <Text style={styles.headerText}>Record Audio</Text>
+      </View>
+      </View>
       <Text style={styles.timer}>{formatTime(duration)}</Text>
 
       <WaveForm barCount={50} />
@@ -141,5 +146,15 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     fontSize: 16,
+  },
+  header: {
+    width: '100%',
+    paddingBottom: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
   },
 });

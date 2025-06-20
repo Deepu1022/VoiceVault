@@ -48,7 +48,7 @@ export default function AudioListScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, padding: 16, backgroundColor: '#fff', marginTop:20 },
+    container: { flex: 1, padding: 16, backgroundColor: '#fff', marginTop:30 },
     title: { fontSize: 20, fontWeight: 'bold', marginBottom: 12 },
     card: {
         flexDirection: 'row',

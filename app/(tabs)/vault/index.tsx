@@ -129,7 +129,7 @@ export default function VaultScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: { flex: 1, backgroundColor: '#fff', padding: 16 , marginTop:20},
+    container: { flex: 1, backgroundColor: '#fff', padding: 16 , marginTop:30},
     title: { fontSize: 24, fontWeight: 'bold', marginBottom: 10 },
     card: {
         flexDirection: 'row',

@@ -50,7 +50,6 @@ export default function AudioPlayerScreen() {
             setDuration(status.durationMillis || 1);
         }
     };
-
     const toggle = async () => {
         if (!sound) return;
         const status = await sound.getStatusAsync();
@@ -60,7 +59,6 @@ export default function AudioPlayerScreen() {
             await sound.playAsync();
         }
     };
-
     const formatTime = (ms: number) => {
         const totalSecs = Math.floor(ms / 1000);
         const mins = String(Math.floor(totalSecs / 60)).padStart(2, '0');
