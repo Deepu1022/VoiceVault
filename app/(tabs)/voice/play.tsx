@@ -5,7 +5,7 @@ import Slider from '@react-native-community/slider';
 import { Audio } from 'expo-av';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
-import { Alert, Button, StyleSheet, Text, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 export default function AudioPlayerScreen() {
     const { uri, name, id } = useLocalSearchParams<{ uri: string; name: string; id: string }>();
@@ -115,8 +115,13 @@ export default function AudioPlayerScreen() {
                 <Text>{formatTime(duration)}</Text>
             </View>
 
-            <Button title={isPlaying ? 'Pause' : 'Play'} onPress={toggle} />
-            <Button title="Delete" color="red" onPress={handleDelete} />
+            <TouchableOpacity style={styles.button} onPress={toggle}>
+                <Text style={styles.buttonText}>{isPlaying ? 'Pause' : 'Play'}</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={[styles.button, styles.deleteButton]} onPress={handleDelete}>
+                <Text style={styles.buttonText}>Delete</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -139,4 +144,22 @@ const styles = StyleSheet.create({
         width: '90%',
         marginBottom: 20,
     },
+    button: {
+        backgroundColor: '#2563EB',
+        paddingVertical: 14,
+        paddingHorizontal: 32,
+        borderRadius: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginVertical: 8,
+        width: '80%',
+    },
+    buttonText: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
+    deleteButton: {
+        backgroundColor: 'red'
+    }
 });
